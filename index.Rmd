@@ -1,0 +1,28 @@
+---
+title: "Evolutionary Genomics & Bioinformatics"
+author: "Lauren Mason"
+date: September 7, 2020
+output: html_document
+bibliography: Data/references.bib
+
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+![](Images/GitHub_website_photo.jpg)
+
+
+## LAB FILES
+
+- [Lab 1: Introduction to R and Reproducible Research](lab1_lauren.html)
+
+
+- [Lab 2: git, GitHub, and RStudio Projects](lab2_lauren.html)
+
+Application written in R [@RCoreTeam] using the Shiny framework [@Chang2015].
+
+## REFERENCES
+

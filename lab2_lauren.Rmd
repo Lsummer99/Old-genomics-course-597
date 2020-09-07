@@ -3,12 +3,14 @@ title: "Lab 1"
 author: "Lauren Mason"
 date: "8/26/2020"
 output: html_document
+bibliography: Data/references.bib
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Application written in R [@RCoreTeam] using the Shiny framework [@Chang2015].
 
 
 ## exercise_1
@@ -56,9 +58,8 @@ nucleotides <- c("A","T","C","G")
 sort(nucleotides)
 ```
 
-
-
 ## References
+
 
 
 
