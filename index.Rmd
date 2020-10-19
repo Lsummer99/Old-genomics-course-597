@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ![](Images/GitHub_website_photo.jpg)
 
 
-## ALL LAB FILES
+## LAB FILES
 
 - [Lab 1: Introduction to R and Reproducible Research](lab1_lauren.html)
 
