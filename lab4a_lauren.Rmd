@@ -1,0 +1,156 @@
+---
+title: "lab4_lauren.Rmd"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+```{r}
+library(tidyverse)
+```
+
+
+## Data visualization with ggplot2
+
+```{r}
+write_csv(surveys_complete, path = "Data/surveys_complete.csv")
+```
+
+```{r}
+str(surveys_complete)
+```
+
+```{r}
+view(surveys_complete)
+```
+
+```{r}
+ggplot(data = surveys_complete)
+```
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length))
+```
+
+```{r}
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
+  geom_point()
+```
+
+## Assign plot to a variable
+```{r}
+surveys_plot <- ggplot(data = surveys_complete, 
+                       mapping = aes(x = weight, y = hindfoot_length))
+```
+
+## Draw the plot
+
+```{r}
+surveys_plot + 
+    geom_point()
+```
+
+
+##Challenge (optional)
+
+## What are the relative strengths and weaknesses of a hexagonal bin plot compared to a scatter plot?
+##     The hexagonal bin plot better demonstrates the number of observations compared to the previous plot scatter plot because the regular scatter plot has many dots of the same color that make it difficult to perceive the quantity of observations. 
+```{r}
+library(hexbin)
+```
+
+```{r}
+surveys_plot +
+ geom_hex()
+```
+
+## Building your plots iterately !!
+
+```{r}
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
+    geom_point()
+```
+
+```{r}
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
+    geom_point(alpha = 0.1, color = "blue")
+```
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
+    geom_point(alpha = 0.1, aes(color = species_id))
+```
+
+## Challenge 2: Use what you just learned to create a scatter plot of weight over species_id with the plot types showing in different colors. Is this a good way to show this type of data?
+
+## This way of showing data clearly shows that certain species weight a lot more than other and that some are pretty similar, however the plot points fail to show how many of each species there are because all the plot points of the different plot_type data blend together
+
+```{r}
+ggplot(data = surveys_complete, aes(x = weight, y = species_id)) + 
+  geom_point(alpha = 0.1, aes(color = plot_type))
+```
+
+## Boxplot
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+    geom_boxplot()
+```
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+    geom_boxplot(alpha = 0) +
+    geom_jitter(alpha = 0.3, color = "tomato")
+```
+
+## Notice how the boxplot layer is behind the jitter layer? What do you need to change in the code to put the boxplot in front of the points such that it's not hidden?
+
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+    geom_jitter(alpha = 0.3, color = "tomato") +
+    geom_boxplot(alpha = 0)
+```
+
+## Boxplot Challenge
+## Replace the box plot with a violin plot; see geom_violin().
+
+```{r}
+as.factor("plot_id")
+```
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+    geom_jitter(alpha = 0.1, color = "tomato") +
+    geom_violin(alpha = 0)
+    
+```
+
+## Represent weight on the log10 scale; see scale_y_log10()
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes((x = species_id), y = log(weight))) +
+    geom_jitter(alpha = 0.3, color = "tomato") +
+    geom_violin(alpha = 0)
+    
+```
+
+
+## So far, we've looked at the distribution of weight within species. Try making a new plot to explore the distribution of another variable within each species.
+## Create boxplot for hindfoot_length. Overlay the boxplot layer on a jitter layer to show actual measurements.
+## Add color to the data points on your boxplot according to the plot from which the sample was taken (plot_id)
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = hindfoot_length)) +
+    geom_jitter(alpha = 0.3, aes(color = plot_id)) +
+    geom_violin(alpha = 0.1)
+```
+
